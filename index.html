@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="./style.css">
+    <script>
+        if (typeof module === 'object') {
+            window.module == module;
+            module = undefined;
+        }
+    </script>
+    <script src="./jquery.js"></script>
+    <script src="./app.js"></script>
+    <script>if (window.module) module = window.module;</script>
+</head>
+<body>
+    <div align="center">
+        <h1>Welcome</h1>
+        <button type="button" class="button red" id="btn_start">...</button>
+    </div>
+</body>
+</html>

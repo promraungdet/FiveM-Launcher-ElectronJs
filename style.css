@@ -1,0 +1,34 @@
+html, body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(44, 44, 44);
+    color: #fff;
+}
+
+.button {
+    padding: 20px;
+    font-size: 20px;
+    border: 0;
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.button.red {
+    background-color: rgb(184, 62, 62);
+}
+
+.button.green {
+    background-color: rgb(37, 112, 53);
+}
+
+.button.red:hover {
+    background-color: rgb(218, 74, 74);
+}
+
+.button.green:hover {
+    background-color: rgb(48, 139, 67);
+}
