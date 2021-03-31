@@ -4,7 +4,8 @@ $(function(){
     const regedit = require('regedit');
     regedit.setExternalVBSLocation('resources/regedit/vbs')
     var DIR_FiveM = "";
-    var IPServer = "192.168.1.2:30120"
+    var IPServer = "192.168.1.2:30120";
+    const Shell = require('node-powershell');
 
     //Get Directory FiveM
     regedit.list("HKCU\\SOFTWARE\\CitizenFX\\FiveM\\", function(err, result) {
@@ -33,45 +34,19 @@ $(function(){
         }
     });
 
-    function cmd(cmd, args, cb) {
-
-        var child = child_process.spawn(cmd, args, {
-            encoding: 'utf8',
-            shell: true
-        });
-
-        child.on('error', (error) => {
-            console.log(error);
-        });
-
-        child.stdout.setEncoding('utf8');
-        child.stdout.on('data', (data) => {
-            data = data.toString();
-            console.log(data);
-        });
-
-        child.stderr.setEncoding('utf8');
-        child.stderr.on('data', (data) => {
-            data = data.toString();
-            console.log(data);
-        });
-
-        child.on('close', (code) => {
-            switch (code) {
-                case 0:
-                    console.log('End.')
-                    break;
-            }
-        });
-
-        if (typeof cb === 'function')
-            cb();
-
-    }
-
     function StartFiveM(){
-        var dir_replace = DIR_FiveM.replace("FiveM.app\\", "");
-        cmd(`${dir_replace}FiveM.exe`, [`fivem://connect/${IPServer}`], null);
+        const ps = new Shell({
+            executionPolicy: 'Bypass',
+            noProfile: true
+        });
+        
+        ps.addCommand(`start fivem://connect/${IPServer}`);
+        ps.invoke().then(output => {
+            console.log(output);
+        }).catch(err => {
+            console.log(err);
+        });
+
     }
 
 });
